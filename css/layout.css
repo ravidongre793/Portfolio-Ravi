@@ -1,0 +1,225 @@
+/* ============================================
+   LAYOUT.CSS — CSS Grid & Flexbox Layouts
+   Mobile-First Responsive Design
+   ============================================ */
+
+/* --- Page Grid Layout --- */
+.page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  min-height: 100vh;
+}
+
+.header { grid-area: header; }
+.main   { grid-area: main; }
+.footer { grid-area: footer; position: relative; }
+
+/* --- Skills Grid --- */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+/* --- Projects Grid --- */
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+/* --- About Grid: Mobile stack --- */
+.about__grid {
+  grid-template-columns: 1fr;
+  text-align: center;
+}
+
+.about__image-card {
+  max-width: 280px;
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
+}
+
+.about__stats {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* --- Education Timeline --- */
+.education__timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+/* --- Contact: centered card layout --- */
+.contact__card {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* --- Header Flex Layout --- */
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__nav-list {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+/* --- Hero Flex --- */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing-xl) var(--spacing-sm);
+}
+
+.hero__cta-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- Footer Flex --- */
+.footer__socials {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+/* --- Project Tags Flex --- */
+.project__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS — Mobile First
+   ============================================ */
+
+/* --- Small screens (480px+) --- */
+@media (min-width: 480px) {
+  .skills__grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .hero__content {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+}
+
+/* --- Tablet (768px+) --- */
+@media (min-width: 768px) {
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__grid {
+    grid-template-columns: 1fr 1.5fr;
+    text-align: left;
+  }
+
+  .about__image-card {
+    margin: 0;
+    max-width: none;
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
+/* --- Desktop (1024px+) --- */
+@media (min-width: 1024px) {
+  .projects__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .skills__grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+/* --- Mobile Navigation Overlay --- */
+@media (max-width: 767px) {
+  .header__hamburger {
+    display: flex;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--color-surface);
+    padding: 5rem var(--spacing-lg) var(--spacing-lg);
+    transition: right var(--transition-base);
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+  }
+
+  .header__nav--open {
+    right: 0;
+  }
+
+  .header__nav-list {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .header__nav-link {
+    font-size: 1.1rem;
+  }
+
+  /* Hamburger animation */
+  .header__hamburger--active .header__hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .header__hamburger--active .header__hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__hamburger--active .header__hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* Mobile overlay backdrop */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+  }
+
+  .nav-overlay--active {
+    display: block;
+  }
+}
+
+/* Hide hamburger on desktop */
+@media (min-width: 768px) {
+  .header__hamburger {
+    display: none;
+  }
+
+  .nav-overlay {
+    display: none !important;
+  }
+}
